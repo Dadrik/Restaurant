@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 version="2.0">
+  <entity class="ru.ncedu.restaurant.model.entity.Food">
+    <attributes>
+      <id name="id">
+        <generated-value strategy="SEQUENCE" generator="food_sequence"/>
+        <sequence-generator name="food_sequence" sequence-name="food_sequence"/>
+      </id>
+      <basic name="name">
+        <column length="32"/>
+      </basic>
+      <basic name="cost"/>
+      <many-to-one name="category" target-entity="ru.ncedu.restaurant.model.entity.Category" fetch="EAGER"/>
+    </attributes>
+  </entity>
+</entity-mappings>

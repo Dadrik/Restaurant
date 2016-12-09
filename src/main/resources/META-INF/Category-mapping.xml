@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 version="2.0">
+  <entity class="ru.ncedu.restaurant.model.entity.Category">
+    <attributes>
+      <id name="id">
+        <generated-value strategy="SEQUENCE" generator="category_sequence"/>
+        <sequence-generator name="category_sequence" sequence-name="category_sequence"/>
+      </id>
+      <basic name="name">
+        <column length="32"/>
+      </basic>
+      <!--
+      <one-to-many name="food" target-entity="Food" mapped-by="category"/>
+      -->
+    </attributes>
+  </entity>
+</entity-mappings>

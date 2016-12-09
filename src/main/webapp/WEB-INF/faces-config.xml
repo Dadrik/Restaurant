@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE faces-config PUBLIC
+    "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+    "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config xmlns="http://java.sun.com/JSF/Configuration">
+
+  <!-- Navigation will be here -->
+
+  <managed-bean>
+    <managed-bean-name>restaurantManager</managed-bean-name>
+    <managed-bean-class>ru.ncedu.restaurant.ui.RestaurantManager</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+      <property-name>foodService</property-name>
+      <value>#{foodService}</value>
+    </managed-property>
+    <managed-property>
+      <property-name>categoryService</property-name>
+      <value>#{categoryService}</value>
+    </managed-property>
+  </managed-bean>
+
+  <managed-bean>
+    <managed-bean-name>categoryConverter</managed-bean-name>
+    <managed-bean-class>ru.ncedu.restaurant.ui.CategoryConverter</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+      <property-name>categoryService</property-name>
+      <value>#{categoryService}</value>
+    </managed-property>
+  </managed-bean>
+
+  <managed-bean>
+    <managed-bean-name>jpaUtil</managed-bean-name>
+    <managed-bean-class>ru.ncedu.restaurant.model.jpa.JPAUtil</managed-bean-class>
+    <managed-bean-scope>application</managed-bean-scope>
+  </managed-bean>
+
+  <managed-bean>
+    <managed-bean-name>foodService</managed-bean-name>
+    <managed-bean-class>ru.ncedu.restaurant.model.jpa.FoodDaoJpa</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+      <property-name>jpaUtil</property-name>
+      <value>#{jpaUtil}</value>
+    </managed-property>
+  </managed-bean>
+
+  <managed-bean>
+    <managed-bean-name>categoryService</managed-bean-name>
+    <managed-bean-class>ru.ncedu.restaurant.model.jpa.CategoryDaoJpa</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+    <managed-property>
+      <property-name>jpaUtil</property-name>
+      <value>#{jpaUtil}</value>
+    </managed-property>
+  </managed-bean>
+
+</faces-config>

@@ -1,0 +1,71 @@
+<project name="Compile and Build Tasks for Restaurant" default="all" basedir=".">
+  <!-- =================================================================== -->
+
+  <target name="all" depends="clean, pack_war"/>
+
+  <!-- =================================================================== -->
+  <!--   Build Properties                                                  -->
+  <!-- =================================================================== -->
+  <target name="init">
+    <property file="build.properties"/>
+    <property name="build.dir" value="./out"/>
+    <property name="src.dir" value="./src/main/java"/>
+    <property name="deploy.dir" value="./target"/>
+    <property name="webapp.dir" value="./src/main/webapp"/>
+    <property name="lib.dir" value="./lib"/>
+    <path id="compile.classpath">
+      <fileset dir="${lib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+  </target>
+
+  <!-- =================================================================== -->
+  <!--  CLEAN                                                              -->
+  <!-- =================================================================== -->
+  <target name="clean" depends="init">
+    <delete includeemptydirs="true">
+      <fileset dir="${build.dir}" includes="**/*"/>
+      <fileset dir="${deploy.dir}" includes="**/*"/>
+    </delete>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- package the java classes into a jar                             -->
+  <!-- =================================================================== -->
+  <target name="pack_jar" depends="init">
+    <javac
+        srcdir="${src.dir}"
+        destdir="${build.dir}"
+        includes="**/*.java">
+      <classpath>
+        <path refid="compile.classpath"/>
+      </classpath>
+    </javac>
+    <jar jarfile="${deploy.dir}/Restaurant.jar">
+      <fileset
+          dir="${build.dir}"
+          includes="**"
+      />
+      <metainf dir="src/main/resources/META-INF"/>
+    </jar>
+  </target>
+
+
+  <!-- =================================================================== -->
+  <!-- package the webapp into a war                                       -->
+  <!-- =================================================================== -->
+  <target name="pack_war" depends="init, pack_jar">
+    <!-- copies over the WEB-INF directory -->
+    <war
+        destfile="${deploy.dir}/Restaurant.war"
+        webxml="${webapp.dir}/WEB-INF/web.xml">
+      <classes dir="${build.dir}"/>
+      <fileset dir="${webapp.dir}">
+        <exclude name="**/web.xml"/>
+      </fileset>
+      <lib dir="${lib.dir}"/>
+      <lib dir="${deploy.dir}"/>
+    </war>
+  </target>
+</project>
