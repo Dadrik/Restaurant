@@ -20,4 +20,5 @@
              valueChangeListener="#{restaurantManager.searchFieldUpdated}"
              immediate="true"/>
 <h:commandButton value="search"
-                 action="#{restaurantManager.searchFood}"/>
+                 action="#{restaurantManager.searchFood}"
+                 immediate="true"/>
