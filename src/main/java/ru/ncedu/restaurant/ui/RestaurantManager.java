@@ -128,8 +128,16 @@ public class RestaurantManager {
     }
 
     public void cancelChanges() {
+        if (currentEditable.getId() == null) {
+            foodList.remove(currentEditable);
+        } else {
+            try {
+                foodList.set(foodList.indexOf(currentEditable), foodService.getById(currentEditable.getId()));
+            } catch (PersistException ex) {
+                handleException(ex);
+            }
+        }
         currentEditable = null;
-        foodList = null;
     }
 
     public void saveChanges() {
@@ -142,7 +150,6 @@ public class RestaurantManager {
             handleException(ex);
         }
         currentEditable = null;
-        foodList = null;
     }
 
     // Error handler
