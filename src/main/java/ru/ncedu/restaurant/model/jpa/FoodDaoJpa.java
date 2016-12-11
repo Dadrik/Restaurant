@@ -19,14 +19,16 @@ public class FoodDaoJpa extends AbstractJPADao<Food, Long> implements FoodDao {
     }
 
     @Override
-    public List<Food> findByName(String name) throws PersistException {
+    public List<Food> findByNameOrCategory(String substring) throws PersistException {
         EntityManager entityManager = jpaUtil.getEntityManagerFactory().createEntityManager();
         List<Food> result;
         try {
             TypedQuery<Food> typedQuery = entityManager.createQuery(
-                    "SELECT f FROM Food f WHERE LOWER(f.name) LIKE LOWER(:name_template)",
+                    "SELECT food FROM Food food " +
+                            "WHERE LOWER(food.name) LIKE LOWER(:name_template) " +
+                            "OR LOWER(category.name) LIKE LOWER(:name_template)",
                     Food.class
-            ).setParameter("name_template", "%" + name + "%");
+            ).setParameter("name_template", "%" + substring + "%");
             result = typedQuery.getResultList();
         } catch (Exception e) {
             throw new PersistException(e);
@@ -35,11 +37,4 @@ public class FoodDaoJpa extends AbstractJPADao<Food, Long> implements FoodDao {
         }
         return result;
     }
-
-    // TODO
-    @Override
-    public List<Food> findByCategory(String categoryName) {
-        return null;
-    }
-
 }

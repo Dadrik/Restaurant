@@ -65,7 +65,7 @@ public class RestaurantManager {
         try {
             if (this.foodList == null) {
                 if (searchField != null && !searchField.isEmpty())
-                    foodList = foodService.findByName(searchField);
+                    foodList = foodService.findByNameOrCategory(searchField);
                 else
                     foodList = foodService.getAll();
             }
