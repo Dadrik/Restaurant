@@ -6,7 +6,6 @@
 
 <h:panelGrid>
     <h:dataTable value="#{restaurantManager.food}" var="food"
-                 border="1"
                  styleClass="food-table"
                  headerClass="food-table-header"
                  rowClasses="food-table-odd-row,food-table-even-row">

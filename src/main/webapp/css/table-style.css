@@ -1,6 +1,6 @@
 .food-table {
     border-collapse: collapse;
-    border-width: 1px;
+    border: 1px solid black;
 }
 
 .food-table-header {
