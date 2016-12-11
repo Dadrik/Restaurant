@@ -98,15 +98,14 @@ public class RestaurantManager {
 
     // Actions
     public void searchFood() {
-        foodList = null;
+        cancelChanges();
         foodChecked.clear();
-        currentEditable = null;
+        foodList = null;
     }
 
     public void addNew() {
         currentEditable = new Food();
         foodList.add(0, currentEditable);
-        searchField = null;
     }
 
     public void deleteChecked() {
@@ -114,20 +113,21 @@ public class RestaurantManager {
             if (food != null && foodChecked.get(food)) {
                 try {
                     foodService.delete(food);
+                    foodList.remove(food);
                 } catch (PersistException ex) {
                     handleException(ex);
                 }
             }
         }
-        currentEditable = null;
         foodChecked.clear();
-        foodList = null;
     }
 
     public void editFood() {
     }
 
     public void cancelChanges() {
+        if (currentEditable == null)
+            return;
         if (currentEditable.getId() == null) {
             foodList.remove(currentEditable);
         } else {
