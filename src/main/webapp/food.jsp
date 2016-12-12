@@ -18,6 +18,7 @@
             </f:facet>
             <h:panelGrid>
                 <h:inputText id="name" value="#{food.name}"
+                             required="true"
                              rendered="#{restaurantManager.currentEditable == food}">
                     <f:validateLength minimum="3" maximum="32"/>
                 </h:inputText>
@@ -33,6 +34,7 @@
             </f:facet>
             <h:panelGrid>
                 <h:inputText id="cost" value="#{food.cost}"
+                             required="true"
                              rendered="#{restaurantManager.currentEditable == food}">
                     <f:validateLongRange minimum="1"/>
                 </h:inputText>
