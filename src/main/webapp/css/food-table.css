@@ -5,7 +5,7 @@ table.food-table {
 
 table.food-table th.header-row {
     text-align: center;
-    background: none repeat scroll 0 0 #E5E5E5;
+    background: none repeat scroll 0 0 #c8c8c8;
     border: 1px solid #BBBBBB;
     padding: 8px;
 }
@@ -18,12 +18,40 @@ table.food-table th, table.food-table td {
     border: 1px solid #BBBBBB;
 }
 
+table.food-table a.sort_asc {
+    text-decoration: none;
+    color: black;
+    background-image: url(../images/sort_asc.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding: 10px 20px;
+}
+
+table.food-table a.sort_desc {
+    text-decoration: none;
+    color: black;
+    background-image: url(../images/sort_desc.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding: 10px 20px;
+}
+
+table.food-table a.sort_both {
+    text-decoration: none;
+    color: black;
+    background-image: url(../images/sort_both.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding: 10px 20px;
+}
+
+
 table.food-table tr.odd-row {
     background: none repeat scroll 0 0 #FFFFFF;
 }
 
 table.food-table tr.even-row {
-    background: none repeat scroll 0 0 #F9F9F9;
+    background: none repeat scroll 0 0 #F5F5F5;
 }
 
 table.food-table td.checkbox-column {

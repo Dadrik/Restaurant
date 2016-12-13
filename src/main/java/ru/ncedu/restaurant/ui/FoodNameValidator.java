@@ -8,7 +8,7 @@ import javax.faces.validator.ValidatorException;
 
 public class FoodNameValidator implements Validator {
     private static final int MIN_LENGTH = 3;
-    private static final int MAX_LENGTH = 32;
+    private static final int MAX_LENGTH = 64;
 
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {

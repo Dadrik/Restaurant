@@ -15,7 +15,7 @@ public class CategoryDaoJpa extends AbstractJPADao<Category, Long> implements Ca
 
     @Override
     protected String getSelectAllQuery() {
-        return "SELECT c FROM Category c";
+        return "SELECT c FROM Category c ORDER BY c.name";
     }
 
     @Override

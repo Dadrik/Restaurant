@@ -15,7 +15,7 @@ public class FoodDaoJpa extends AbstractJPADao<Food, Long> implements FoodDao {
 
     @Override
     protected String getSelectAllQuery() {
-        return "SELECT f FROM Food f";
+        return "SELECT f FROM Food f ORDER BY f.name";
     }
 
     @Override
@@ -26,7 +26,8 @@ public class FoodDaoJpa extends AbstractJPADao<Food, Long> implements FoodDao {
             TypedQuery<Food> typedQuery = entityManager.createQuery(
                     "SELECT food FROM Food food " +
                             "WHERE LOWER(food.name) LIKE LOWER(:name_template) " +
-                            "OR LOWER(category.name) LIKE LOWER(:name_template)",
+                            "OR LOWER(category.name) LIKE LOWER(:name_template) " +
+                            "ORDER BY food.name",
                     Food.class
             ).setParameter("name_template", "%" + substring + "%");
             result = typedQuery.getResultList();

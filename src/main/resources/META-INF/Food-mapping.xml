@@ -8,7 +8,7 @@
         <sequence-generator name="food_sequence" sequence-name="food_sequence"/>
       </id>
       <basic name="name">
-        <column length="32"/>
+        <column length="64"/>
       </basic>
       <basic name="cost"/>
       <many-to-one name="category" target-entity="ru.ncedu.restaurant.model.entity.Category" fetch="EAGER"/>

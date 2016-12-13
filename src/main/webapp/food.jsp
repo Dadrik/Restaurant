@@ -14,7 +14,9 @@
     </h:column>
     <h:column>
         <f:facet name="header">
-            <h:outputText value="Name"/>
+            <h:commandLink styleClass="#{restaurantManager.sortClasses['name']}" action="#{restaurantManager.sortByName}">
+                <h:outputText value="Name"/>
+            </h:commandLink>
         </f:facet>
         <h:inputText id="name" value="#{food.name}"
                      styleClass="input-name"
@@ -29,7 +31,9 @@
     </h:column>
     <h:column>
         <f:facet name="header">
-            <h:outputText value="Cost"/>
+            <h:commandLink styleClass="#{restaurantManager.sortClasses['cost']}" action="#{restaurantManager.sortByCost}">
+                <h:outputText value="Cost"/>
+            </h:commandLink>
         </f:facet>
         <h:inputText id="cost" value="#{food.cost}"
                      styleClass="input-cost"
@@ -44,7 +48,9 @@
     </h:column>
     <h:column>
         <f:facet name="header">
-            <h:outputText value="Category"/>
+            <h:commandLink styleClass="#{restaurantManager.sortClasses['category']}" action="#{restaurantManager.sortByCategory}">
+                <h:outputText value="Category"/>
+            </h:commandLink>
         </f:facet>
         <h:selectOneMenu value="#{food.category}"
                          styleClass="select-category"
