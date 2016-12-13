@@ -6,7 +6,8 @@
 <f:view>
     <head>
         <title>Restaurant X</title>
-        <link rel="stylesheet" type="text/css" href="css/table-style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/food-table.css"/>
+        <link rel="stylesheet" type="text/css" href="css/toolbar.css"/>
     </head>
     <body>
     <h1>Restaurant</h1>
