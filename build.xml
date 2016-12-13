@@ -8,11 +8,13 @@
   <!-- =================================================================== -->
   <target name="init">
     <property file="build.properties"/>
-    <property name="build.dir" value="./out"/>
     <property name="src.dir" value="./src/main/java"/>
+    <property name="build.dir" value="./out"/>
     <property name="deploy.dir" value="./target"/>
     <property name="webapp.dir" value="./src/main/webapp"/>
     <property name="lib.dir" value="./lib"/>
+    <property name="tools.src.dir" value="tools/java"/>
+    <property name="tools.build.dir" value="tools/classes"/>
     <path id="compile.classpath">
       <fileset dir="${lib.dir}">
         <include name="**/*.jar"/>
@@ -21,17 +23,18 @@
   </target>
 
   <!-- =================================================================== -->
-  <!--  CLEAN                                                              -->
+  <!--  Clean                                                              -->
   <!-- =================================================================== -->
   <target name="clean" depends="init">
     <delete includeemptydirs="true">
       <fileset dir="${build.dir}" includes="**/*"/>
       <fileset dir="${deploy.dir}" includes="**/*"/>
+      <fileset dir="${tools.build.dir}" includes="**/*"/>
     </delete>
   </target>
 
   <!-- =================================================================== -->
-  <!-- package the java classes into a jar                             -->
+  <!-- Package the java classes into a jar                             -->
   <!-- =================================================================== -->
   <target name="pack_jar" depends="init">
     <javac
@@ -53,10 +56,9 @@
 
 
   <!-- =================================================================== -->
-  <!-- package the webapp into a war                                       -->
+  <!-- Package the webapp into a war                                       -->
   <!-- =================================================================== -->
   <target name="pack_war" depends="init, pack_jar">
-    <!-- copies over the WEB-INF directory -->
     <war
         destfile="${deploy.dir}/Restaurant.war"
         webxml="${webapp.dir}/WEB-INF/web.xml">
@@ -67,5 +69,46 @@
       <lib dir="${lib.dir}"/>
       <lib dir="${deploy.dir}"/>
     </war>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Compile tools                                                       -->
+  <!-- =================================================================== -->
+  <target name="compile_tools" depends="init">
+    <javac
+        srcdir="${tools.src.dir}"
+        destdir="${tools.build.dir}"
+        includes="**/*.java">
+      <classpath>
+        <path refid="compile.classpath"/>
+        <pathelement location="${deploy.dir}/Restaurant.jar"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Generate schema on database                                         -->
+  <!-- =================================================================== -->
+  <target name="generate_tables" depends="init, pack_jar, compile_tools">
+    <java classname="ru.ncedu.restaurant.tools.oracle.DDLGenerator" fork="yes" >
+      <classpath>
+        <path refid="compile.classpath"/>
+        <pathelement location="${deploy.dir}/Restaurant.jar"/>
+        <pathelement location="${tools.build.dir}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Populate data on database                                         -->
+  <!-- =================================================================== -->
+  <target name="populate_data" depends="init, pack_jar, compile_tools">
+    <java classname="ru.ncedu.restaurant.tools.oracle.Populator" fork="yes" >
+      <classpath>
+        <path refid="compile.classpath"/>
+        <pathelement location="${deploy.dir}/Restaurant.jar"/>
+        <pathelement location="${tools.build.dir}"/>
+      </classpath>
+    </java>
   </target>
 </project>
