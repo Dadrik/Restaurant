@@ -20,7 +20,7 @@
                      styleClass="input-name"
                      required="true"
                      rendered="#{restaurantManager.currentEditable == food}">
-            <f:validateLength minimum="3" maximum="32"/>
+            <f:validator validatorId="foodNameValidator"/>
         </h:inputText>
         <h:outputText value="#{food.name}"
                       rendered="#{restaurantManager.currentEditable != food}"/>
